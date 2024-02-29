@@ -44,12 +44,10 @@ public class SerialCommunication : MonoBehaviour
         {
             if (!gameManager.isTouchControls)
             {
-                Debug.Log("tring2");
                 keys = KeyStruct.FromInput();
             }
             else
             {
-                Debug.Log("tring3");
                 keys = gameManager.FromTouchControls();
             }
         }
