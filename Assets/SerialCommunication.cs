@@ -42,10 +42,16 @@ public class SerialCommunication : MonoBehaviour
         fromKeyboard = remotePort == null || !remotePort.IsOpen;
         if (fromKeyboard)
         {
-            if (!gameManager.touchControls)
+            if (!gameManager.isTouchControls)
+            {
+                Debug.Log("tring2");
                 keys = KeyStruct.FromInput();
+            }
             else
+            {
+                Debug.Log("tring3");
                 keys = gameManager.FromTouchControls();
+            }
         }
         CommunicateWithRemote();
         CheckForBytes();
