@@ -95,7 +95,7 @@ ModelImporter:
       name: ubs.001
     second: {fileID: 2100000, guid: 99aabd10c81cb9945b49c1845cf13dae, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1

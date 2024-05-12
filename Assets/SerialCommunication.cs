@@ -27,16 +27,37 @@ public class SerialCommunication : MonoBehaviour
     public bool fromKeyboard = true;
     public GameManager gameManager;
 
+    private Thread thread;
+    private bool running = true;
+    private float loopFrequency = 100f; // Frequency in Hz
+
     void Start()
     {
-        counter = 40;
+        counter = 10;
         updateCountDisplay();
+
+        // Start the thread when the script is initialized
+
+        thread = new Thread(ThreadLoop);
+        running = true;
+        thread.Start();
     }
-     
-    // Update is called once per frame
-    void Update()
+
+    private void ThreadLoop()
     {
+        // Calculate the time interval in milliseconds between each loop iteration
+        int interval = (int)(1000f / loopFrequency);
+
+        while (running)
+        {
+            CommunicateWithRemote();
+            CheckForBytes();
+
+            // Sleep the thread for the specified interval
+            Thread.Sleep(interval);
+        }
     }
+
     private void FixedUpdate()
     {
         fromKeyboard = remotePort == null || !remotePort.IsOpen;
@@ -51,8 +72,12 @@ public class SerialCommunication : MonoBehaviour
                 keys = gameManager.FromTouchControls();
             }
         }
-        CommunicateWithRemote();
-        CheckForBytes();
+    }
+    private void OnApplicationQuit()
+    {
+        // Stop the thread when the application quits
+        running = false;
+        thread.Join(); // Wait for the thread to finish before quitting
     }
     public void AskForRemotePort()
     {

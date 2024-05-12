@@ -47,7 +47,7 @@ public class Robot : MonoBehaviour
             //rb.velocity = sped * (transform.right * Mathf.Cos(ang) + transform.forward * Mathf.Sin(ang));
             //rb.angularVelocity = Vector3.up * angularSpeed * 2 * Mathf.PI;
             rb.AddForce(sped * (transform.right * Mathf.Cos(ang) + transform.forward * Mathf.Sin(ang)), ForceMode.Force);
-            rb.angularVelocity = Vector3.up * angularSpeed * 2 * Mathf.PI;
+            rb.angularVelocity = 2 * angularSpeed * Mathf.PI * Vector3.up;
         }
     }
 }
